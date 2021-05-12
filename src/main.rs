@@ -15,14 +15,8 @@ fn main() {
 }
 
 fn handle(request: &Request) -> Response<Cursor<Vec<u8>>> {
-    println!(
-        "method: {:?},\nurl: {:?},\nheaders: {:?}",
-        request.method(),
-        request.url(),
-        request.headers()
-    );
-
-    Response::from_string("ok")
+    let (_, response) = request.url().split_at(1);
+    Response::from_string(response.to_string())
 }
 
 fn listening_port() -> String {
